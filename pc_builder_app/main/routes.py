@@ -6,7 +6,7 @@ from pc_builder_app.models import Book, Author, Genre, User
 from pc_builder_app.main.forms import BookForm, AuthorForm, GenreForm
 
 # Import app and db from events_app package so that we can run app
-from pc_builder_app.extensions import app, bcrypt, db
+from pc_builder_app.extensions import app, db, bcrypt
 
 main = Blueprint("main", __name__)
 
@@ -14,11 +14,12 @@ main = Blueprint("main", __name__)
 #           Routes                       #
 ##########################################
 
+
 @main.route('/')
 def homepage():
     all_books = Book.query.all()
     all_users = User.query.all()
-    return render_template('home.html', 
+    return render_template('home.html',
         all_books=all_books, all_users=all_users)
 
 
@@ -47,73 +48,90 @@ def create_book():
 @main.route('/create_author', methods=['GET', 'POST'])
 @login_required
 def create_author():
-    # TODO: Make an AuthorForm instance
+    form = AuthorForm()
+    if form.validate_on_submit():
+        new_author = Author(
+            name=form.name.data,
+            biography=form.biography.data
+        )
+        db.session.add(new_author)
+        db.session.commit()
 
-    # TODO: If the form was submitted and is valid, create a new Author object
-    # and save to the database, then flash a success message to the user and
-    # redirect to the homepage
-
-    # TODO: Send the form object to the template, and use it to render the form
-    # fields
-    return render_template('create_author.html')
+        flash('New author created successfully.')
+        return redirect(url_for('main.homepage'))
+    
+    # if form was not valid, or was not submitted yet
+    return render_template('create_author.html', form=form)
 
 
 @main.route('/create_genre', methods=['GET', 'POST'])
 @login_required
 def create_genre():
-    # TODO: Make a GenreForm instance
+    form = GenreForm()
+    if form.validate_on_submit():
+        new_genre = Genre(
+            name=form.name.data
+        )
+        db.session.add(new_genre)
+        db.session.commit()
 
-    # TODO: If the form was submitted and is valid, create a new Genre object
-    # and save to the database, then flash a success message to the user and
-    # redirect to the homepage
-
-    # TODO: Send the form object to the template, and use it to render the form
-    # fields
-    return render_template('create_genre.html')
+        flash('New genre created successfully.')
+        return redirect(url_for('main.homepage'))
+    
+    # if form was not valid, or was not submitted yet
+    return render_template('create_genre.html', form=form)
 
 
 @main.route('/book/<book_id>', methods=['GET', 'POST'])
-@login_required
 def book_detail(book_id):
     book = Book.query.get(book_id)
     form = BookForm(obj=book)
+    
+    # if form was submitted and contained no errors
+    if form.validate_on_submit():
+        book.title = form.title.data
+        book.publish_date = form.publish_date.data
+        book.author = form.author.data
+        book.audience = form.audience.data
+        book.genres = form.genres.data
 
-    # TODO: If the form was submitted and is valid, update the fields in the 
-    # Book object and save to the database, then flash a success message to the 
-    # user and redirect to the book detail page
+        db.session.commit()
+
+        flash('Book was updated successfully.')
+        return redirect(url_for('main.book_detail', book_id=book_id))
 
     return render_template('book_detail.html', book=book, form=form)
 
 
 @main.route('/profile/<username>')
-@login_required
 def profile(username):
-    # TODO: Make a query for the user with the given username, and send to the
-    # template
-
-    # STRETCH CHALLENGE: Add ability to modify a user's username or favorite 
-    # books
-    return render_template('profile.html', username=username)
+    user = User.query.filter_by(username=username).one()
+    return render_template('profile.html', user=user)
 
 
-# TODO: Add `@login_required`
 @main.route('/favorite/<book_id>', methods=['POST'])
 @login_required
 def favorite_book(book_id):
     book = Book.query.get(book_id)
-    # TODO: If the book is not already in user's favorites, then add it,
-    # commit the change to the database, and flash a success message.
+    if book in current_user.favorite_books:
+        flash('Book already in favorites.')
+    else:
+        current_user.favorite_books.append(book)
+        db.session.add(current_user)
+        db.session.commit()
+        flash('Book added to favorites.')
+    return redirect(url_for('main.book_detail', book_id=book_id))
 
-    # Then, redirect the user to the book detail page for the given book.
-    return "Not yet implemented!"
 
-
-# TODO: Add `@login_required`
 @main.route('/unfavorite/<book_id>', methods=['POST'])
 @login_required
 def unfavorite_book(book_id):
-    # TODO: If the book is in user's favorites, then remove it,
-    # commit the change to the database, and flash a success message.
-
-    # Then, redirect the user to the book detail page for the given book.
-    return "Not yet implemented!"
+    book = Book.query.get(book_id)
+    if book not in current_user.favorite_books:
+        flash('Book not in favorites.')
+    else:
+        current_user.favorite_books.remove(book)
+        db.session.add(current_user)
+        db.session.commit()
+        flash('Book removed from favorites.')
+    return redirect(url_for('main.book_detail', book_id=book_id))
