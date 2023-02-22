@@ -2,10 +2,9 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, ValidationError
 from pc_builder_app.models import User
-from pc_builder_app.extensions import app, db, bcrypt
+from pc_builder_app.extensions import bcrypt
 
 class SignUpForm(FlaskForm):
-    # TODO: Fill out the form fields & validators!
     username = StringField('User Name',
         validators=[DataRequired(), Length(min=3, max=50)])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -16,8 +15,8 @@ class SignUpForm(FlaskForm):
         if user:
             raise ValidationError('That username is taken. Please choose a different one.')
 
+
 class LoginForm(FlaskForm):
-    # TODO: Fill out the form fields & validators!
     username = StringField('User Name',
         validators=[DataRequired(), Length(min=3, max=50)])
     password = PasswordField('Password', validators=[DataRequired()])
