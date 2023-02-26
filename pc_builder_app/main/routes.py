@@ -14,6 +14,21 @@ main = Blueprint("main", __name__)
 #           Routes                       #
 ##########################################
 
+# def create_books():
+#     a1 = Author(name='Harper Lee')
+#     b1 = Book(
+#         title='To Kill a Mockingbird',
+#         publish_date=date(1960, 7, 11),
+#         author=a1
+#     )
+#     db.session.add(b1)
+
+#     a2 = Author(name='Sylvia Plath')
+#     b2 = Book(title='The Bell Jar', author=a2)
+#     db.session.add(b2)
+#     db.session.commit()
+# create_books()
+
 
 @main.route('/')
 def homepage():
@@ -105,8 +120,10 @@ def book_detail(book_id):
 
 @main.route('/profile/<username>')
 def profile(username):
+    all_books = Book.query.all()
+
     user = User.query.filter_by(username=username).one()
-    return render_template('profile.html', user=user)
+    return render_template('profile.html', user=user, all_books=all_books)
 
 
 @main.route('/favorite/<book_id>', methods=['POST'])
