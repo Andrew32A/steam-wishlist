@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, ValidationError
-from pc_builder_app.models import User
-from pc_builder_app.extensions import bcrypt
+from steam_wishlist_app.models import User
+from steam_wishlist_app.extensions import bcrypt
 
 class SignUpForm(FlaskForm):
     username = StringField('User Name',

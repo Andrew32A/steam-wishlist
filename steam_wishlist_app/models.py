@@ -1,5 +1,5 @@
 """Create database models to represent tables."""
-from pc_builder_app.extensions import db
+from steam_wishlist_app.extensions import db
 from sqlalchemy.orm import backref
 from flask_login import UserMixin
 import enum

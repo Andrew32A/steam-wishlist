@@ -2,7 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
-from pc_builder_app.config import Config
+from steam_wishlist_app.config import Config
 import os
 
 app = Flask(__name__)

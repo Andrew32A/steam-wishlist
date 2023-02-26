@@ -1,11 +1,11 @@
 from flask import Blueprint, request, render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 
-from pc_builder_app.models import Book, Author, Genre, User
-from pc_builder_app.auth.forms import SignUpForm, LoginForm
+from steam_wishlist_app.models import Book, Author, Genre, User
+from steam_wishlist_app.auth.forms import SignUpForm, LoginForm
 
 # Import app and db from events_app package so that we can run app
-from pc_builder_app.extensions import app, db, bcrypt
+from steam_wishlist_app.extensions import app, db, bcrypt
 
 auth = Blueprint("auth", __name__)
 

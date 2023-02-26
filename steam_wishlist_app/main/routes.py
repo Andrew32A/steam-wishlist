@@ -2,11 +2,11 @@
 from flask import Blueprint, request, render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from datetime import date, datetime
-from pc_builder_app.models import Book, Author, Genre, User
-from pc_builder_app.main.forms import BookForm, AuthorForm, GenreForm
+from steam_wishlist_app.models import Book, Author, Genre, User
+from steam_wishlist_app.main.forms import BookForm, AuthorForm, GenreForm
 
 # Import app and db from events_app package so that we can run app
-from pc_builder_app.extensions import app, db, bcrypt
+from steam_wishlist_app.extensions import app, db, bcrypt
 
 main = Blueprint("main", __name__)
 
@@ -15,19 +15,19 @@ main = Blueprint("main", __name__)
 ##########################################
 
 def create_books():
-    a1 = Author(name='Harper Lee')
+    a1 = Author(name='FromSoftware')
     b1 = Book(
-        title='To Kill a Mockingbird',
-        publish_date=date(1960, 7, 11),
+        title='Bloodborne',
+        publish_date=date(2015, 3, 24),
         author=a1
     )
     db.session.add(b1)
 
-    a2 = Author(name='Sylvia Plath')
-    b2 = Book(title='The Bell Jar', author=a2)
+    a2 = Author(name='Team Cherry')
+    b2 = Book(title='Hollow Knight', author=a2)
     db.session.add(b2)
     db.session.commit()
-create_books()
+# create_books()
 
 
 @main.route('/')
