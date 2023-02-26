@@ -13,79 +13,6 @@ class FormEnum(enum.Enum):
     def __str__(self):
         return str(self.value)
 
-class Motherboard(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    model_name = db.Column(db.String(80), nullable=False)
-
-    def __str__(self):
-        return f'<Model: {self.model_name}>'
-
-    def __repr__(self):
-        return f'<Model: {self.model_name}>'
-
-class Case(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    model_name = db.Column(db.String(80), nullable=False)
-
-    def __str__(self):
-        return f'<Model: {self.model_name}>'
-
-    def __repr__(self):
-        return f'<Model: {self.model_name}>'
-
-class PSU(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    model_name = db.Column(db.String(80), nullable=False)
-
-    def __str__(self):
-        return f'<Model: {self.model_name}>'
-
-    def __repr__(self):
-        return f'<Model: {self.model_name}>'
-
-class Storage(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    model_name = db.Column(db.String(80), nullable=False)
-
-    def __str__(self):
-        return f'<Model: {self.model_name}>'
-
-    def __repr__(self):
-        return f'<Model: {self.model_name}>'
-
-class CPU(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    model_name = db.Column(db.String(80), nullable=False)
-
-    def __str__(self):
-        return f'<Model: {self.model_name}>'
-
-    def __repr__(self):
-        return f'<Model: {self.model_name}>'
-
-class GPU(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    model_name = db.Column(db.String(80), nullable=False)
-
-    def __str__(self):
-        return f'<Model: {self.model_name}>'
-
-    def __repr__(self):
-        return f'<Model: {self.model_name}>'
-
-class RAM(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    model_name = db.Column(db.String(80), nullable=False)
-
-    def __str__(self):
-        return f'<Model: {self.model_name}>'
-
-    def __repr__(self):
-        return f'<Model: {self.model_name}>'
-
-
-
-
 class Audience(FormEnum):
     CHILDREN = 'Children'
     YOUNG_ADULT = 'Young Adult'
@@ -119,6 +46,7 @@ class Book(db.Model):
     def __repr__(self):
         return f'<Book: {self.title}>'
 
+# CHANGE TO PUBLISHER
 class Author(db.Model):
     """Author model."""
     id = db.Column(db.Integer, primary_key=True)

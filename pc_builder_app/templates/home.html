@@ -4,7 +4,7 @@
 
 <h2>Browse</h2>
 
-<ul>
+<ul class="gallery">
 {% for book in all_books %}
     <li><a href="/book/{{ book.id }}">{{ book.title }}</a> by {{ book.author.name }}</li>
 {% endfor %}
@@ -16,7 +16,7 @@
     <a href="/create_user">+ New User</a>
 </p>
 
-<ul>
+<ul class="users">
     {% for user in all_users %}
         <li><a href="/profile/{{ user.username }}">{{ user.username }}</a></li>
     {% endfor %}
