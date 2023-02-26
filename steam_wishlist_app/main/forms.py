@@ -21,7 +21,7 @@ class AuthorForm(FlaskForm):
     """Form to create an author."""
     name = StringField('Publisher Name',
         validators=[DataRequired(), Length(min=3, max=80)])
-    biography = TextAreaField('Author Biography')
+    biography = TextAreaField('Publisher Description')
     submit = SubmitField('Submit')
 
 

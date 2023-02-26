@@ -131,12 +131,12 @@ def profile(username):
 def favorite_book(book_id):
     book = Book.query.get(book_id)
     if book in current_user.favorite_books:
-        flash('Game already in favorites.')
+        flash('Game already in wishlist.')
     else:
         current_user.favorite_books.append(book)
         db.session.add(current_user)
         db.session.commit()
-        flash('Game added to favorites.')
+        flash('Game added to wishlist.')
     return redirect(url_for('main.book_detail', book_id=book_id))
 
 
@@ -145,10 +145,10 @@ def favorite_book(book_id):
 def unfavorite_book(book_id):
     book = Book.query.get(book_id)
     if book not in current_user.favorite_books:
-        flash('Game not in favorites.')
+        flash('Game not in wishlist.')
     else:
         current_user.favorite_books.remove(book)
         db.session.add(current_user)
         db.session.commit()
-        flash('Game removed from favorites.')
+        flash('Game removed from wishlist.')
     return redirect(url_for('main.book_detail', book_id=book_id))
