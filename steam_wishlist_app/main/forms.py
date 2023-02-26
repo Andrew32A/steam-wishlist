@@ -6,10 +6,10 @@ from steam_wishlist_app.models import Audience, Book, Author, Genre, User
 
 class BookForm(FlaskForm):
     """Form to create a book."""
-    title = StringField('Book Title',
+    title = StringField('Game Title',
         validators=[DataRequired(), Length(min=3, max=80)])
     publish_date = DateField('Date Published')
-    author = QuerySelectField('Author',
+    author = QuerySelectField('Publisher',
         query_factory=lambda: Author.query, allow_blank=False)
     audience = SelectField('Audience', choices=Audience.choices())
     genres = QuerySelectMultipleField('Genres',
@@ -19,7 +19,7 @@ class BookForm(FlaskForm):
 
 class AuthorForm(FlaskForm):
     """Form to create an author."""
-    name = StringField('Author Name',
+    name = StringField('Publisher Name',
         validators=[DataRequired(), Length(min=3, max=80)])
     biography = TextAreaField('Author Biography')
     submit = SubmitField('Submit')

@@ -55,7 +55,7 @@ def create_book():
         db.session.add(new_book)
         db.session.commit()
 
-        flash('New book was created successfully.')
+        flash('New game was added successfully.')
         return redirect(url_for('main.book_detail', book_id=new_book.id))
     return render_template('create_book.html', form=form)
 
@@ -72,7 +72,7 @@ def create_author():
         db.session.add(new_author)
         db.session.commit()
 
-        flash('New author created successfully.')
+        flash('New publisher was added successfully.')
         return redirect(url_for('main.homepage'))
     
     # if form was not valid, or was not submitted yet
@@ -112,7 +112,7 @@ def book_detail(book_id):
 
         db.session.commit()
 
-        flash('Book was updated successfully.')
+        flash('Game was updated successfully.')
         return redirect(url_for('main.book_detail', book_id=book_id))
 
     return render_template('book_detail.html', book=book, form=form)
@@ -123,7 +123,7 @@ def profile(username):
     all_books = Book.query.all()
 
     user = User.query.filter_by(username=username).one()
-    return render_template('profile.html', user=user, user_favorite=user_favorite, all_books=all_books)
+    return render_template('profile.html', user=user, all_books=all_books)
 
 
 @main.route('/favorite/<book_id>', methods=['POST'])
@@ -131,12 +131,12 @@ def profile(username):
 def favorite_book(book_id):
     book = Book.query.get(book_id)
     if book in current_user.favorite_books:
-        flash('Book already in favorites.')
+        flash('Game already in favorites.')
     else:
         current_user.favorite_books.append(book)
         db.session.add(current_user)
         db.session.commit()
-        flash('Book added to favorites.')
+        flash('Game added to favorites.')
     return redirect(url_for('main.book_detail', book_id=book_id))
 
 
@@ -145,10 +145,10 @@ def favorite_book(book_id):
 def unfavorite_book(book_id):
     book = Book.query.get(book_id)
     if book not in current_user.favorite_books:
-        flash('Book not in favorites.')
+        flash('Game not in favorites.')
     else:
         current_user.favorite_books.remove(book)
         db.session.add(current_user)
         db.session.commit()
-        flash('Book removed from favorites.')
+        flash('Game removed from favorites.')
     return redirect(url_for('main.book_detail', book_id=book_id))

@@ -7,14 +7,14 @@
 <!-- TODO: Show this only if the user is logged in and the book is not in their 
     favorites-->
 <form action="/favorite/{{ book.id }}" method="POST">
-    <input type="submit" value="Favorite This Book">
+    <input type="submit" value="Add to wishlist">
 </form>
 
 
 <!-- TODO: Show this only if the user is logged in and the book is not in their 
     favorites-->
 <form action="/unfavorite/{{ book.id }}" method="POST">
-    <input type="submit" value="Unfavorite This Book">
+    <input type="submit" value="Remove from wishlist">
 </form>
 
 <p>
@@ -44,7 +44,7 @@
 <form method="POST" action="{{ url_for('main.book_detail', book_id=book.id) }}">
     {{ form.csrf_token }}
     <fieldset>
-        <legend>Edit this book</legend>
+        <legend>Edit this game</legend>
 
         {{ form.title.label }}
         {{ form.title }}
