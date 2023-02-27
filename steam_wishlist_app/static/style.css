@@ -51,10 +51,25 @@ li.error {
     color: red;
 }
 
+li {
+    list-style: none;
+}
+
+.box {
+    border: 5px solid black;
+    border-radius: 20px;
+    box-shadow: 10px 5px 5px gray;
+    padding: 0.5em;
+    padding-bottom: 2em;
+}
+
 .gallery {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 4em;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 4em;
 }
 
 .users {
@@ -64,6 +79,8 @@ li.error {
 }
 
 img {
-    height: auto;
-    width: 100px;
+    height: 100%;
+    width: 100%;
+    object-fit: scale-down;
+    border-radius: 100px;
 }

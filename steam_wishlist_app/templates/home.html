@@ -5,9 +5,13 @@
 <h2>Browse</h2>
 
 <ul class="gallery">
-{% for game in all_games %}
-    <li><a href="/game/{{ game.id }}">{{ game.title }} <img src="{{ game.image }}"> </a> by {{ game.publisher.name }}</li>
-{% endfor %}
+    {% for game in all_games %}
+        <li class="box">
+            <a href="/game/{{ game.id }}">{{ game.title }}: by {{ game.publisher.name }}
+                <img src="{{ game.image }}"> </a> 
+                
+        </li>
+    {% endfor %}
 </ul>
 
 <h2>Users</h2>
