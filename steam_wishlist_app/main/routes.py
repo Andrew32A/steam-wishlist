@@ -14,7 +14,7 @@ main = Blueprint("main", __name__)
 #           Routes                       #
 ##########################################
 
-def create_books():
+def create_games():
     a1 = Publisher(name='FromSoftware')
     b1 = Game(
         title='Bloodborne',
@@ -30,37 +30,37 @@ def create_books():
         publisher=a2)
     db.session.add(b2)
     db.session.commit()
-# create_books()
+# create_games()
 
 
 @main.route('/')
 def homepage():
-    all_books = Game.query.all()
+    all_games = Game.query.all()
     all_users = User.query.all()
     return render_template('home.html',
-        all_books=all_books, all_users=all_users)
+        all_games=all_games, all_users=all_users)
 
 
-@main.route('/create_book', methods=['GET', 'POST'])
+@main.route('/create_game', methods=['GET', 'POST'])
 @login_required
-def create_book():
+def create_game():
     form = BookForm()
 
     # if form was submitted and contained no errors
     if form.validate_on_submit(): 
-        new_book = Game(
+        new_game = Game(
             title=form.title.data,
             publish_date=form.publish_date.data,
             publisher=form.publisher.data,
             audience=form.audience.data,
             genres=form.genres.data
         )
-        db.session.add(new_book)
+        db.session.add(new_game)
         db.session.commit()
 
         flash('New game was added successfully.')
-        return redirect(url_for('main.book_detail', book_id=new_book.id))
-    return render_template('create_book.html', form=form)
+        return redirect(url_for('main.game_detail', game_id=new_game.id))
+    return render_template('create_game.html', form=form)
 
 
 @main.route('/create_author', methods=['GET', 'POST'])
@@ -100,58 +100,58 @@ def create_genre():
     return render_template('create_genre.html', form=form)
 
 
-@main.route('/book/<book_id>', methods=['GET', 'POST'])
-def book_detail(book_id):
-    book = Game.query.get(book_id)
-    form = BookForm(obj=book)
+@main.route('/game/<game_id>', methods=['GET', 'POST'])
+def game_detail(game_id):
+    game = Game.query.get(game_id)
+    form = BookForm(obj=game)
     
     # if form was submitted and contained no errors
     if form.validate_on_submit():
-        book.title = form.title.data
-        book.publish_date = form.publish_date.data
-        book.publisher = form.publisher.data
-        book.audience = form.audience.data
-        book.genres = form.genres.data
+        game.title = form.title.data
+        game.publish_date = form.publish_date.data
+        game.publisher = form.publisher.data
+        game.audience = form.audience.data
+        game.genres = form.genres.data
 
         db.session.commit()
 
         flash('Game was updated successfully.')
-        return redirect(url_for('main.book_detail', book_id=book_id))
+        return redirect(url_for('main.game_detail', game_id=game_id))
 
-    return render_template('book_detail.html', book=book, form=form)
+    return render_template('game_detail.html', game=game, form=form)
 
 
 @main.route('/profile/<username>')
 def profile(username):
-    all_books = Game.query.all()
+    all_games = Game.query.all()
 
     user = User.query.filter_by(username=username).one()
-    return render_template('profile.html', user=user, all_books=all_books)
+    return render_template('profile.html', user=user, all_games=all_games)
 
 
-@main.route('/favorite/<book_id>', methods=['POST'])
+@main.route('/favorite/<game_id>', methods=['POST'])
 @login_required
-def favorite_book(book_id):
-    book = Game.query.get(book_id)
-    if book in current_user.favorite_books:
+def favorite_game(game_id):
+    game = Game.query.get(game_id)
+    if game in current_user.favorite_games:
         flash('Game already in wishlist.')
     else:
-        current_user.favorite_books.append(book)
+        current_user.favorite_games.append(game)
         db.session.add(current_user)
         db.session.commit()
         flash('Game added to wishlist.')
-    return redirect(url_for('main.book_detail', book_id=book_id))
+    return redirect(url_for('main.game_detail', game_id=game_id))
 
 
-@main.route('/unfavorite/<book_id>', methods=['POST'])
+@main.route('/unfavorite/<game_id>', methods=['POST'])
 @login_required
-def unfavorite_book(book_id):
-    book = Game.query.get(book_id)
-    if book not in current_user.favorite_books:
+def unfavorite_game(game_id):
+    game = Game.query.get(game_id)
+    if game not in current_user.favorite_games:
         flash('Game not in wishlist.')
     else:
-        current_user.favorite_books.remove(book)
+        current_user.favorite_games.remove(game)
         db.session.add(current_user)
         db.session.commit()
         flash('Game removed from wishlist.')
-    return redirect(url_for('main.book_detail', book_id=book_id))
+    return redirect(url_for('main.game_detail', game_id=game_id))

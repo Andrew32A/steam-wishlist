@@ -2,46 +2,46 @@
 
 {% block content %}
 
-<h1>{{ book.title }}</h1>
+<h1>{{ game.title }}</h1>
 
-<!-- TODO: Show this only if the user is logged in and the book is not in their 
+<!-- TODO: Show this only if the user is logged in and the game is not in their 
     favorites-->
-<form action="/favorite/{{ book.id }}" method="POST">
+<form action="/favorite/{{ game.id }}" method="POST">
     <input type="submit" value="Add to wishlist">
 </form>
 
 
-<!-- TODO: Show this only if the user is logged in and the book is not in their 
+<!-- TODO: Show this only if the user is logged in and the game is not in their 
     favorites-->
-<form action="/unfavorite/{{ book.id }}" method="POST">
+<form action="/unfavorite/{{ game.id }}" method="POST">
     <input type="submit" value="Remove from wishlist">
 </form>
 
 <p>
-    <strong>Publisher</strong>: {{ book.publisher.name }}
+    <strong>Publisher</strong>: {{ game.publisher.name }}
 </p>
 
 <p>
-    <strong>Publisher Bio</strong>: {{ book.publisher.biography }}
+    <strong>Publisher Bio</strong>: {{ game.publisher.biography }}
 </p>
 
 <p>
-    <strong>Publish date</strong>: {{ book.publish_date }}
+    <strong>Publish date</strong>: {{ game.publish_date }}
 </p>
 
 <p>
-    <strong>Audience</strong>: {{ book.audience }}
+    <strong>Audience</strong>: {{ game.audience }}
 </p>
 
 <p>
     <strong>Genres</strong>: 
     
-    {% for genre in book.genres %}
+    {% for genre in game.genres %}
     {{ genre.name }},
     {% endfor %}
 </p>
 
-<form method="POST" action="{{ url_for('main.book_detail', book_id=book.id) }}">
+<form method="POST" action="{{ url_for('main.game_detail', game_id=game.id) }}">
     {{ form.csrf_token }}
     <fieldset>
         <legend>Edit this game</legend>

@@ -5,8 +5,8 @@
 <h2>Browse</h2>
 
 <ul class="gallery">
-{% for book in all_books %}
-    <li><a href="/book/{{ book.id }}">{{ book.title }}</a> by {{ book.publisher.name }}</li>
+{% for game in all_games %}
+    <li><a href="/game/{{ game.id }}">{{ game.title }}</a> by {{ game.publisher.name }}</li>
 {% endfor %}
 </ul>
 

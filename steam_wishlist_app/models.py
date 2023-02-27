@@ -20,7 +20,7 @@ class Audience(FormEnum):
     ALL = 'All'
 
 class Game(db.Model):
-    """Book model."""
+    """Game model."""
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80), nullable=False)
     publish_date = db.Column(db.Date)
@@ -29,14 +29,14 @@ class Game(db.Model):
     publisher_id = db.Column(db.Integer, db.ForeignKey('publisher.id'), nullable=False)
     publisher = db.relationship('Publisher', back_populates='games')
     
-    # The audience - Who is this book written for?
+    # The audience - Who is this game written for?
     audience = db.Column(db.Enum(Audience), default=Audience.ALL)
 
     # The genres, e.g. fiction, sci-fi, fantasy
     genres = db.relationship(
         'Genre', secondary='game_genre', back_populates='games')
 
-    # Who favorited this book?
+    # Who favorited this game?
     users_who_favorited = db.relationship(
         'User', secondary='user_game', back_populates='favorite_games')
 
@@ -88,7 +88,7 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return f'<User: {self.username}>'
 
-favorite_books_table = db.Table('user_game',
+favorite_games_table = db.Table('user_game',
     db.Column('game_id', db.Integer, db.ForeignKey('game.id')),
     db.Column('user_id', db.Integer, db.ForeignKey('user.id'))
 )
