@@ -56,11 +56,19 @@ li {
 }
 
 .box {
-    border: 5px solid black;
+    border: 2px solid black;
     border-radius: 20px;
     box-shadow: 10px 5px 5px gray;
     padding: 0.5em;
     padding-bottom: 2em;
+    background-color: lightgray;
+}
+
+.box:hover {
+    -webkit-transform: scale(0.95);
+    -ms-transform: scale(0.95);
+    transform: scale(0.95);
+    transform: 1s ease;
 }
 
 .gallery {
@@ -82,5 +90,5 @@ img {
     height: 100%;
     width: 100%;
     object-fit: scale-down;
-    border-radius: 100px;
+    /* border-radius: 100px; */
 }
