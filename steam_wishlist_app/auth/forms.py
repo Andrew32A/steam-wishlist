@@ -15,7 +15,6 @@ class SignUpForm(FlaskForm):
         if user:
             raise ValidationError('That username is taken. Please choose a different one.')
 
-
 class LoginForm(FlaskForm):
     username = StringField('User Name',
         validators=[DataRequired(), Length(min=3, max=50)])

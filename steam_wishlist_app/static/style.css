@@ -62,3 +62,8 @@ li.error {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 2em;
 }
+
+img {
+    height: auto;
+    width: 100px;
+}

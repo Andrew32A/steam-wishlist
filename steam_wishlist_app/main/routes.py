@@ -1,25 +1,21 @@
 """Import packages and modules."""
 from flask import Blueprint, request, render_template, redirect, url_for, flash
-from flask_login import login_user, logout_user, login_required, current_user
-from datetime import date, datetime
+from flask_login import login_required, current_user
+from datetime import date
 from steam_wishlist_app.models import Game, Publisher, Genre, User
-from steam_wishlist_app.main.forms import BookForm, AuthorForm, GenreForm
-
-# Import app and db from events_app package so that we can run app
-from steam_wishlist_app.extensions import app, db, bcrypt
+from steam_wishlist_app.main.forms import GameForm, AuthorForm, GenreForm
+from steam_wishlist_app.extensions import db
 
 main = Blueprint("main", __name__)
 
-##########################################
-#           Routes                       #
-##########################################
 
 def create_games():
     a1 = Publisher(name='FromSoftware')
     b1 = Game(
         title='Bloodborne',
         publish_date=date(2015, 3, 24),
-        publisher=a1
+        publisher=a1,
+        image="https://image.api.playstation.com/vulcan/img/rnd/202010/2614/NVmnBXze9ElHzU6SmykrJLIV.png"
     )
     db.session.add(b1)
 
@@ -27,7 +23,9 @@ def create_games():
     b2 = Game(
         title='Hollow Knight',
         publish_date=date(2017, 2, 24),
-        publisher=a2)
+        publisher=a2,
+        image="https://cdn.cloudflare.steamstatic.com/steam/apps/367520/capsule_616x353.jpg?t=1667006028"
+    )
     db.session.add(b2)
     db.session.commit()
 # create_games()
@@ -44,7 +42,7 @@ def homepage():
 @main.route('/create_game', methods=['GET', 'POST'])
 @login_required
 def create_game():
-    form = BookForm()
+    form = GameForm()
 
     # if form was submitted and contained no errors
     if form.validate_on_submit(): 
@@ -103,7 +101,7 @@ def create_genre():
 @main.route('/game/<game_id>', methods=['GET', 'POST'])
 def game_detail(game_id):
     game = Game.query.get(game_id)
-    form = BookForm(obj=game)
+    form = GameForm(obj=game)
     
     # if form was submitted and contained no errors
     if form.validate_on_submit():

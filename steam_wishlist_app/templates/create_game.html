@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form method="POST" action="{{ url_for('main.create_book') }}">
+<form method="POST" action="{{ url_for('main.create_game') }}">
     {{ form.csrf_token }}
     <fieldset>
         <legend>Enter a game</legend>
@@ -23,10 +23,10 @@
         {% endfor %}
         </ul>
         
-        {{ form.author.label }}
-        {{ form.author }}
+        {{ form.publisher.label }}
+        {{ form.publisher }}
         <ul>
-        {% for error in form.author.errors %}
+        {% for error in form.publisher.errors %}
             <li class="error">{{ error }}</li>
         {% endfor %}
         </ul>

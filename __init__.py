@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from pc_builder_app.config import Config
+from steam_wishlist_app.config import Config
 import os
 
 app = Flask(__name__)
@@ -9,7 +9,7 @@ app.secret_key = os.urandom(24)
 
 db = SQLAlchemy(app)
 
-from pc_builder_app.main.routes import main
+from steam_wishlist_app.main.routes import main
 
 app.register_blueprint(main)
 

@@ -1,6 +1,5 @@
 """Create database models to represent tables."""
 from steam_wishlist_app.extensions import db
-from sqlalchemy.orm import backref
 from flask_login import UserMixin
 import enum
 
@@ -23,6 +22,7 @@ class Game(db.Model):
     """Game model."""
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80), nullable=False)
+    image = db.Column(db.String(500), nullable=False)
     publish_date = db.Column(db.Date)
 
     # The publisher - Who wrote it?
@@ -46,7 +46,6 @@ class Game(db.Model):
     def __repr__(self):
         return f'<Game: {self.title}>'
 
-# CHANGE TO PUBLISHER
 class Publisher(db.Model):
     """Publisher model."""
     id = db.Column(db.Integer, primary_key=True)

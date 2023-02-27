@@ -4,8 +4,8 @@ from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleF
 from wtforms.validators import DataRequired, Length, ValidationError
 from steam_wishlist_app.models import Audience, Game, Publisher, Genre, User
 
-class BookForm(FlaskForm):
-    """Form to create a book."""
+class GameForm(FlaskForm):
+    """Form to create a game."""
     title = StringField('Game Title',
         validators=[DataRequired(), Length(min=3, max=80)])
     publish_date = DateField('Date Published')
