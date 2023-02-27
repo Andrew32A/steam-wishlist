@@ -25,9 +25,9 @@ class Game(db.Model):
     title = db.Column(db.String(80), nullable=False)
     publish_date = db.Column(db.Date)
 
-    # The author - Who wrote it?
-    author_id = db.Column(db.Integer, db.ForeignKey('author.id'), nullable=False)
-    author = db.relationship('Author', back_populates='games')
+    # The publisher - Who wrote it?
+    publisher_id = db.Column(db.Integer, db.ForeignKey('publisher.id'), nullable=False)
+    publisher = db.relationship('Publisher', back_populates='games')
     
     # The audience - Who is this book written for?
     audience = db.Column(db.Enum(Audience), default=Audience.ALL)
@@ -47,18 +47,18 @@ class Game(db.Model):
         return f'<Game: {self.title}>'
 
 # CHANGE TO PUBLISHER
-class Author(db.Model):
-    """Author model."""
+class Publisher(db.Model):
+    """Publisher model."""
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
     biography = db.Column(db.String(200))
-    games = db.relationship('Game', back_populates='author')
+    games = db.relationship('Game', back_populates='publisher')
 
     def __str__(self):
-        return f'<Author: {self.name}>'
+        return f'<Publisher: {self.name}>'
 
     def __repr__(self):
-        return f'<Author: {self.name}>'
+        return f'<Publisher: {self.name}>'
 
 class Genre(db.Model):
     """Genre model."""

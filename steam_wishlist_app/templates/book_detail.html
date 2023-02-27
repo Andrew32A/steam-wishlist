@@ -18,11 +18,11 @@
 </form>
 
 <p>
-    <strong>Author</strong>: {{ book.author.name }}
+    <strong>Publisher</strong>: {{ book.publisher.name }}
 </p>
 
 <p>
-    <strong>Author Bio</strong>: {{ book.author.biography }}
+    <strong>Publisher Bio</strong>: {{ book.publisher.biography }}
 </p>
 
 <p>
@@ -52,8 +52,8 @@
         {{ form.publish_date.label }}
         {{ form.publish_date(placeholder="YYYY-mm-dd") }}
         
-        {{ form.author.label }}
-        {{ form.author }}
+        {{ form.publisher.label }}
+        {{ form.publisher }}
         
         {{ form.audience.label }}
         {{ form.audience }}

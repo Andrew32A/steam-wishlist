@@ -2,7 +2,7 @@
 from flask import Blueprint, request, render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from datetime import date, datetime
-from steam_wishlist_app.models import Game, Author, Genre, User
+from steam_wishlist_app.models import Game, Publisher, Genre, User
 from steam_wishlist_app.main.forms import BookForm, AuthorForm, GenreForm
 
 # Import app and db from events_app package so that we can run app
@@ -15,19 +15,19 @@ main = Blueprint("main", __name__)
 ##########################################
 
 def create_books():
-    a1 = Author(name='FromSoftware')
+    a1 = Publisher(name='FromSoftware')
     b1 = Game(
         title='Bloodborne',
         publish_date=date(2015, 3, 24),
-        author=a1
+        publisher=a1
     )
     db.session.add(b1)
 
-    a2 = Author(name='Team Cherry')
+    a2 = Publisher(name='Team Cherry')
     b2 = Game(
         title='Hollow Knight',
         publish_date=date(2017, 2, 24),
-        author=a2)
+        publisher=a2)
     db.session.add(b2)
     db.session.commit()
 # create_books()
@@ -51,7 +51,7 @@ def create_book():
         new_book = Game(
             title=form.title.data,
             publish_date=form.publish_date.data,
-            author=form.author.data,
+            publisher=form.publisher.data,
             audience=form.audience.data,
             genres=form.genres.data
         )
@@ -68,11 +68,11 @@ def create_book():
 def create_author():
     form = AuthorForm()
     if form.validate_on_submit():
-        new_author = Author(
+        new_publisher = Publisher(
             name=form.name.data,
             biography=form.biography.data
         )
-        db.session.add(new_author)
+        db.session.add(new_publisher)
         db.session.commit()
 
         flash('New publisher was added successfully.')
@@ -109,7 +109,7 @@ def book_detail(book_id):
     if form.validate_on_submit():
         book.title = form.title.data
         book.publish_date = form.publish_date.data
-        book.author = form.author.data
+        book.publisher = form.publisher.data
         book.audience = form.audience.data
         book.genres = form.genres.data
 
