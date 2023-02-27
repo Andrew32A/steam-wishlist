@@ -1,7 +1,7 @@
 from flask import Blueprint, request, render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 
-from steam_wishlist_app.models import Book, Author, Genre, User
+from steam_wishlist_app.models import Game, Author, Genre, User
 from steam_wishlist_app.auth.forms import SignUpForm, LoginForm
 
 # Import app and db from events_app package so that we can run app

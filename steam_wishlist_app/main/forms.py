@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, DateField, SelectField, SubmitField, TextAreaField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 from wtforms.validators import DataRequired, Length, ValidationError
-from steam_wishlist_app.models import Audience, Book, Author, Genre, User
+from steam_wishlist_app.models import Audience, Game, Author, Genre, User
 
 class BookForm(FlaskForm):
     """Form to create a book."""

@@ -2,7 +2,7 @@
 from flask import Blueprint, request, render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from datetime import date, datetime
-from steam_wishlist_app.models import Book, Author, Genre, User
+from steam_wishlist_app.models import Game, Author, Genre, User
 from steam_wishlist_app.main.forms import BookForm, AuthorForm, GenreForm
 
 # Import app and db from events_app package so that we can run app
@@ -16,7 +16,7 @@ main = Blueprint("main", __name__)
 
 def create_books():
     a1 = Author(name='FromSoftware')
-    b1 = Book(
+    b1 = Game(
         title='Bloodborne',
         publish_date=date(2015, 3, 24),
         author=a1
@@ -24,7 +24,10 @@ def create_books():
     db.session.add(b1)
 
     a2 = Author(name='Team Cherry')
-    b2 = Book(title='Hollow Knight', author=a2)
+    b2 = Game(
+        title='Hollow Knight',
+        publish_date=date(2017, 2, 24),
+        author=a2)
     db.session.add(b2)
     db.session.commit()
 # create_books()
@@ -32,7 +35,7 @@ def create_books():
 
 @main.route('/')
 def homepage():
-    all_books = Book.query.all()
+    all_books = Game.query.all()
     all_users = User.query.all()
     return render_template('home.html',
         all_books=all_books, all_users=all_users)
@@ -45,7 +48,7 @@ def create_book():
 
     # if form was submitted and contained no errors
     if form.validate_on_submit(): 
-        new_book = Book(
+        new_book = Game(
             title=form.title.data,
             publish_date=form.publish_date.data,
             author=form.author.data,
@@ -99,7 +102,7 @@ def create_genre():
 
 @main.route('/book/<book_id>', methods=['GET', 'POST'])
 def book_detail(book_id):
-    book = Book.query.get(book_id)
+    book = Game.query.get(book_id)
     form = BookForm(obj=book)
     
     # if form was submitted and contained no errors
@@ -120,7 +123,7 @@ def book_detail(book_id):
 
 @main.route('/profile/<username>')
 def profile(username):
-    all_books = Book.query.all()
+    all_books = Game.query.all()
 
     user = User.query.filter_by(username=username).one()
     return render_template('profile.html', user=user, all_books=all_books)
@@ -129,7 +132,7 @@ def profile(username):
 @main.route('/favorite/<book_id>', methods=['POST'])
 @login_required
 def favorite_book(book_id):
-    book = Book.query.get(book_id)
+    book = Game.query.get(book_id)
     if book in current_user.favorite_books:
         flash('Game already in wishlist.')
     else:
@@ -143,7 +146,7 @@ def favorite_book(book_id):
 @main.route('/unfavorite/<book_id>', methods=['POST'])
 @login_required
 def unfavorite_book(book_id):
-    book = Book.query.get(book_id)
+    book = Game.query.get(book_id)
     if book not in current_user.favorite_books:
         flash('Game not in wishlist.')
     else:
