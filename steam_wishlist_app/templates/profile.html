@@ -11,9 +11,13 @@ Welcome to {{ user.username }}'s profile.
 <p>
     {{ user.username }}'s Wishlist:
 
-    <ul>
-        {% for ITEM in TODO %}
-            <li>hi</li>
+    <ul class="gallery">
+        {% for game in user_wishlist %}
+            <li class="box">
+                <a href="/game/{{ game.id }}">{{ game.title }}: by {{ game.publisher.name }}
+                    <img src="{{ game.image }}"> </a> 
+                    
+            </li>
         {% endfor %}
     </ul>
     

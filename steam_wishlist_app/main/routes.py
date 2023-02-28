@@ -61,7 +61,7 @@ def create_game():
     return render_template('create_game.html', form=form)
 
 
-@main.route('/create_author', methods=['GET', 'POST'])
+@main.route('/create_publisher', methods=['GET', 'POST'])
 @login_required
 def create_author():
     form = AuthorForm()
@@ -77,7 +77,7 @@ def create_author():
         return redirect(url_for('main.homepage'))
     
     # if form was not valid, or was not submitted yet
-    return render_template('create_author.html', form=form)
+    return render_template('create_publisher.html', form=form)
 
 
 @main.route('/create_genre', methods=['GET', 'POST'])
@@ -122,9 +122,11 @@ def game_detail(game_id):
 @main.route('/profile/<username>')
 def profile(username):
     all_games = Game.query.all()
-
     user = User.query.filter_by(username=username).one()
-    return render_template('profile.html', user=user, all_games=all_games)
+
+    user_wishlist = user.favorite_games
+
+    return render_template('profile.html', user=user, all_games=all_games, user_wishlist=user_wishlist)
 
 
 @main.route('/favorite/<game_id>', methods=['POST'])
