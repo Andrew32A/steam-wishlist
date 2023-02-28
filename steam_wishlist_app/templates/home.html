@@ -16,10 +16,6 @@
 
 <h2>Users</h2>
 
-<p>
-    <a href="/create_user">+ New User</a>
-</p>
-
 <ul class="users">
     {% for user in all_users %}
         <li><a href="/profile/{{ user.username }}">{{ user.username }}</a></li>

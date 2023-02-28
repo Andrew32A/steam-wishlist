@@ -3,10 +3,8 @@
 {% block content %}
 
 <p>
-Welcome to {{ user.username }}'s profile.
+    Welcome to {{ user.username }}'s profile.
 </p>
-
-<!-- TODO: Display the user's actual favorites here -->
 
 <p>
     {{ user.username }}'s Wishlist:
@@ -20,7 +18,7 @@ Welcome to {{ user.username }}'s profile.
             </li>
         {% endfor %}
     </ul>
-    
+      
 </p>
 
 {% endblock %}
