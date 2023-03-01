@@ -138,6 +138,12 @@ def init_db():
     )
     db.session.add(u7)
 
+    u8 = User(
+        username="Isabella",
+        password=bcrypt.generate_password_hash("1").decode('utf-8')
+    )
+    db.session.add(u8)
+
     db.session.commit()
 
 init_db()

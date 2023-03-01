@@ -2,13 +2,13 @@
 
 {% block content %}
 
-<h1>{{ game.title }}</h1>
+<h1 class="gameTitle" >{{ game.title }}</h1>
 
-<form action="/favorite/{{ game.id }}" method="POST">
+<form class="favButton" action="/favorite/{{ game.id }}" method="POST">
     <input type="submit" value="Add to wishlist">
 </form>
 
-<form action="/unfavorite/{{ game.id }}" method="POST">
+<form class="favButton" action="/unfavorite/{{ game.id }}" method="POST">
     <input type="submit" value="Remove from wishlist">
 </form>
 

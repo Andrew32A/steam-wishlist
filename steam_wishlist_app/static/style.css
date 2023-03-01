@@ -34,6 +34,12 @@ nav a {
     font-size: 1.2em;
 }
 
+nav a:hover {
+    color: white;
+    background-color: darkslateblue;
+    border-radius: 100px;
+}
+
 fieldset {
     display: flex;
     flex-direction: column;
@@ -105,7 +111,6 @@ img {
     height: 100%;
     width: 100%;
     object-fit: scale-down;
-    /* border-radius: 100px; */
 }
 
 .users > li > a {
@@ -125,4 +130,28 @@ img {
     -ms-transform: scale(1.05);
     transform: scale(1.05);
     transform: 1s ease;
+}
+
+.favButton {
+    display: flex;
+    justify-content: center;
+    padding: 0.5em;
+}
+
+.favButton > input {
+    color: white;
+    background-color: darkslateblue;
+    border-radius: 100px;
+}
+
+.favButton > input:hover {
+    -webkit-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    transform: scale(1.05);
+    transform: 1s ease;
+}
+
+.gameTitle {
+    display: flex;
+    justify-content: center;
 }
