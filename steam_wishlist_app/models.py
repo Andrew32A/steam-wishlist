@@ -12,12 +12,6 @@ class FormEnum(enum.Enum):
     def __str__(self):
         return str(self.value)
 
-class Audience(FormEnum):
-    CHILDREN = 'Children'
-    YOUNG_ADULT = 'Young Adult'
-    ADULT = 'Adult'
-    ALL = 'All'
-
 class Game(db.Model):
     """Game model."""
     id = db.Column(db.Integer, primary_key=True)
@@ -25,18 +19,12 @@ class Game(db.Model):
     image = db.Column(db.String(500), nullable=False)
     publish_date = db.Column(db.Date)
 
-    # The publisher - Who wrote it?
     publisher_id = db.Column(db.Integer, db.ForeignKey('publisher.id'), nullable=False)
     publisher = db.relationship('Publisher', back_populates='games')
-    
-    # The audience - Who is this game written for?
-    audience = db.Column(db.Enum(Audience), default=Audience.ALL)
 
-    # The genres, e.g. fiction, sci-fi, fantasy
     genres = db.relationship(
         'Genre', secondary='game_genre', back_populates='games')
 
-    # Who favorited this game?
     users_who_favorited = db.relationship(
         'User', secondary='user_game', back_populates='favorite_games')
 
@@ -50,7 +38,6 @@ class Publisher(db.Model):
     """Publisher model."""
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
-    biography = db.Column(db.String(200))
     games = db.relationship('Game', back_populates='publisher')
 
     def __str__(self):

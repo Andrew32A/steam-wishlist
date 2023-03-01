@@ -8,14 +8,15 @@ from steam_wishlist_app.extensions import db
 
 main = Blueprint("main", __name__)
 
-
-def create_games():
+def init_db():
+    db.drop_all()
+    db.create_all()
     a1 = Publisher(name='FromSoftware')
     b1 = Game(
         title='Bloodborne',
         publish_date=date(2015, 3, 24),
         publisher=a1,
-        image="https://image.api.playstation.com/vulcan/img/rnd/202010/2614/NVmnBXze9ElHzU6SmykrJLIV.png"
+        image="https://image.api.playstation.com/vulcan/img/rnd/202010/2614/NVmnBXze9ElHzU6SmykrJLIV.png",
     )
     db.session.add(b1)
 
@@ -27,9 +28,16 @@ def create_games():
         image="https://cdn.cloudflare.steamstatic.com/steam/apps/367520/capsule_616x353.jpg?t=1667006028"
     )
     db.session.add(b2)
-    db.session.commit()
-# create_games()
 
+    u1 = User(
+        username="bob",
+        password="1"
+    )
+    db.session.add(u1)
+
+    db.session.commit()
+
+init_db()
 
 @main.route('/')
 def homepage():
@@ -50,7 +58,6 @@ def create_game():
             title=form.title.data,
             publish_date=form.publish_date.data,
             publisher=form.publisher.data,
-            audience=form.audience.data,
             genres=form.genres.data
         )
         db.session.add(new_game)
@@ -67,8 +74,7 @@ def create_author():
     form = AuthorForm()
     if form.validate_on_submit():
         new_publisher = Publisher(
-            name=form.name.data,
-            biography=form.biography.data
+            name=form.name.data
         )
         db.session.add(new_publisher)
         db.session.commit()
@@ -78,25 +84,6 @@ def create_author():
     
     # if form was not valid, or was not submitted yet
     return render_template('create_publisher.html', form=form)
-
-
-@main.route('/create_genre', methods=['GET', 'POST'])
-@login_required
-def create_genre():
-    form = GenreForm()
-    if form.validate_on_submit():
-        new_genre = Genre(
-            name=form.name.data
-        )
-        db.session.add(new_genre)
-        db.session.commit()
-
-        flash('New genre created successfully.')
-        return redirect(url_for('main.homepage'))
-    
-    # if form was not valid, or was not submitted yet
-    return render_template('create_genre.html', form=form)
-
 
 @main.route('/game/<game_id>', methods=['GET', 'POST'])
 def game_detail(game_id):
@@ -108,7 +95,6 @@ def game_detail(game_id):
         game.title = form.title.data
         game.publish_date = form.publish_date.data
         game.publisher = form.publisher.data
-        game.audience = form.audience.data
         game.genres = form.genres.data
 
         db.session.commit()
