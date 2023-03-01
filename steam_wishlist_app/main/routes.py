@@ -21,6 +21,9 @@ def init_db():
     a7 = Publisher(name="Motion Twin")
     a8 = Publisher(name="Valve")
 
+    a99 = Publisher(name="Not on list")
+    db.session.add(a99)
+
     b1 = Game(
         title='Bloodborne',
         publish_date=date(2015, 3, 24),
@@ -98,6 +101,42 @@ def init_db():
         password="1"
     )
     db.session.add(u1)
+
+    u2 = User(
+        username="Alex",
+        password="1"
+    )
+    db.session.add(u2)
+
+    u3 = User(
+        username="Josh",
+        password="1"
+    )
+    db.session.add(u3)
+
+    u4 = User(
+        username="Brian",
+        password="1"
+    )
+    db.session.add(u4)
+
+    u5 = User(
+        username="Lon",
+        password="1"
+    )
+    db.session.add(u5)
+
+    u6 = User(
+        username="Mark",
+        password="1"
+    )
+    db.session.add(u6)
+
+    u7 = User(
+        username="Andrew",
+        password="1"
+    )
+    db.session.add(u7)
 
     db.session.commit()
 

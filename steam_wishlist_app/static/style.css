@@ -2,7 +2,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #eee;
+    background-color: #125CA1;
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -29,6 +29,7 @@ nav a {
     color: navy;
     text-decoration: none;
     border: 1px solid black;
+    border-radius: 10px;
     padding: 1px 5px;
     font-size: 1.2em;
 }
@@ -108,9 +109,11 @@ img {
 }
 
 .users > li > a {
+    display: flex;
+    justify-content: center;
     text-decoration: none;
     color: white;
-    padding: 1em;
+    padding: 0.5em;
     border: 1px solid black;
     border-radius: 20px;
     background-color: black;
