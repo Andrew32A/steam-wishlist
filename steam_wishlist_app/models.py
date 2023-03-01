@@ -22,9 +22,6 @@ class Game(db.Model):
     publisher_id = db.Column(db.Integer, db.ForeignKey('publisher.id'), nullable=False)
     publisher = db.relationship('Publisher', back_populates='games')
 
-    genres = db.relationship(
-        'Genre', secondary='game_genre', back_populates='games')
-
     users_who_favorited = db.relationship(
         'User', secondary='user_game', back_populates='favorite_games')
 
@@ -45,24 +42,6 @@ class Publisher(db.Model):
 
     def __repr__(self):
         return f'<Publisher: {self.name}>'
-
-class Genre(db.Model):
-    """Genre model."""
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), nullable=False, unique=True)
-    games = db.relationship(
-        'Game', secondary='game_genre', back_populates='genres')
-
-    def __str__(self):
-        return f'<Genre: {self.name}>'
-
-    def __repr__(self):
-        return f'<Genre: {self.name}>'
-
-game_genre_table = db.Table('game_genre',
-    db.Column('game_id', db.Integer, db.ForeignKey('game.id')),
-    db.Column('genre_id', db.Integer, db.ForeignKey('genre.id'))
-)
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -30,14 +30,6 @@
             <li class="error">{{ error }}</li>
         {% endfor %}
         </ul>
-        
-        {{ form.genres.label }}
-        {{ form.genres }}
-        <ul>
-        {% for error in form.genres.errors %}
-            <li class="error">{{ error }}</li>
-        {% endfor %}
-        </ul>
             
         {{ form.submit }}
     </fieldset>

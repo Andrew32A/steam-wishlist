@@ -20,14 +20,6 @@
     <strong>Publish date</strong>: {{ game.publish_date }}
 </p>
 
-<p>
-    <strong>Genres</strong>: 
-    
-    {% for genre in game.genres %}
-    {{ genre.name }},
-    {% endfor %}
-</p>
-
 <form method="POST" action="{{ url_for('main.game_detail', game_id=game.id) }}">
     {{ form.csrf_token }}
     <fieldset>
@@ -41,9 +33,6 @@
         
         {{ form.publisher.label }}
         {{ form.publisher }}
-        
-        {{ form.genres.label }}
-        {{ form.genres }}
             
         {{ form.submit }}
     </fieldset>
