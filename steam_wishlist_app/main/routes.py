@@ -4,7 +4,7 @@ from flask_login import login_required, current_user
 from datetime import date
 from steam_wishlist_app.models import Game, Publisher, User
 from steam_wishlist_app.main.forms import GameForm, AuthorForm
-from steam_wishlist_app.extensions import db
+from steam_wishlist_app.extensions import db, bcrypt
 
 main = Blueprint("main", __name__)
 
@@ -98,43 +98,43 @@ def init_db():
 
     u1 = User(
         username="test-user",
-        password="1"
+        password=bcrypt.generate_password_hash("1").decode('utf-8')
     )
     db.session.add(u1)
 
     u2 = User(
         username="Alex",
-        password="1"
+        password=bcrypt.generate_password_hash("1").decode('utf-8')
     )
     db.session.add(u2)
 
     u3 = User(
         username="Josh",
-        password="1"
+        password=bcrypt.generate_password_hash("1").decode('utf-8')
     )
     db.session.add(u3)
 
     u4 = User(
         username="Brian",
-        password="1"
+        password=bcrypt.generate_password_hash("1").decode('utf-8')
     )
     db.session.add(u4)
 
     u5 = User(
         username="Lon",
-        password="1"
+        password=bcrypt.generate_password_hash("1").decode('utf-8')
     )
     db.session.add(u5)
 
     u6 = User(
         username="Mark",
-        password="1"
+        password=bcrypt.generate_password_hash("1").decode('utf-8')
     )
     db.session.add(u6)
 
     u7 = User(
         username="Andrew",
-        password="1"
+        password=bcrypt.generate_password_hash("1").decode('utf-8')
     )
     db.session.add(u7)
 
