@@ -155,3 +155,12 @@ img {
     display: flex;
     justify-content: center;
 }
+
+.deleteButton {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    color: red;
+    border: 2px solid black;
+    padding: 1em;
+}
