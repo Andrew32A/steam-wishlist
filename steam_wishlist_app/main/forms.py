@@ -8,6 +8,8 @@ class GameForm(FlaskForm):
     """Form to create a game."""
     title = StringField('Game Title',
         validators=[DataRequired(), Length(min=3, max=80)])
+    image = StringField('Image',
+        validators=[DataRequired(), Length(min=3, max=500)])
     publish_date = DateField('Date Published')
     publisher = QuerySelectField('Publisher',
         query_factory=lambda: Publisher.query, allow_blank=False)

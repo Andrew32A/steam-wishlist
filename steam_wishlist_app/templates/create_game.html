@@ -14,6 +14,14 @@
             <li class="error">{{ error }}</li>
         {% endfor %}
         </ul>
+
+        {{ form.image.label }}
+        {{ form.image }}
+        <ul>
+        {% for error in form.image.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
         
         {{ form.publish_date.label }}
         {{ form.publish_date(placeholder="YYYY-mm-dd") }}

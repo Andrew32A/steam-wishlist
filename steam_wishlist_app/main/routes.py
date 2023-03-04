@@ -165,9 +165,9 @@ def create_game():
     if form.validate_on_submit(): 
         new_game = Game(
             title=form.title.data,
+            image=form.image.data,
             publish_date=form.publish_date.data,
             publisher=form.publisher.data,
-            genres=form.genres.data
         )
         db.session.add(new_game)
         db.session.commit()
@@ -202,9 +202,9 @@ def game_detail(game_id):
     # if form was submitted and contained no errors
     if form.validate_on_submit():
         game.title = form.title.data
+        game.image = form.image.data
         game.publish_date = form.publish_date.data
         game.publisher = form.publisher.data
-        game.genres = form.genres.data
 
         db.session.commit()
 
