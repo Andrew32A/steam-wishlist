@@ -61,8 +61,7 @@ class MainTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
         response_text = response.get_data(as_text=True)
-        self.assertIn('To Kill a Mockingbird', response_text)
-        self.assertIn('The Bell Jar', response_text)
+        self.assertIn('Hallow Knight', response_text)
         self.assertIn('me1', response_text)
         self.assertIn('Log In', response_text)
         self.assertIn('Sign Up', response_text)
@@ -80,8 +79,7 @@ class MainTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
         response_text = response.get_data(as_text=True)
-        self.assertIn('To Kill a Mockingbird', response_text)
-        self.assertIn('The Bell Jar', response_text)
+        self.assertIn('Hallow Knight', response_text)
         self.assertIn('me1', response_text)
         self.assertIn('Create Game', response_text)
         self.assertIn('Create Publisher', response_text)
@@ -96,16 +94,16 @@ class MainTests(unittest.TestCase):
         login(self.app, 'me1', 'password')
 
         post_data = {
-            'title': 'Go Set a Watchman',
+            'title': 'Bloodborne',
             'publish_date': '2015-07-14',
             'publisher': 1,
             'genres': []
         }
         self.app.post('/create_game', data=post_data)
 
-        created_game = Game.query.filter_by(title='Go Set a Watchman').one()
+        created_game = Game.query.filter_by(title='Bloodborne').one()
         self.assertIsNotNone(created_game)
-        self.assertEqual(created_game.publisher.name, 'Harper Lee')
+        self.assertEqual(created_game.publisher.name, 'FromSoftware')
 
     def test_create_game_logged_out(self):
         create_games()
@@ -127,7 +125,7 @@ class MainTests(unittest.TestCase):
 
         second_response = self.app.get('/profile/me1', follow_redirects=True)
         second_response_data = second_response.get_data(as_text=True)
-        self.assertIn("To Kill a Mockingbird", second_response_data)
+        self.assertIn("Hallow Knight", second_response_data)
 
     def test_unfavorite_game(self):
         create_games()
@@ -140,5 +138,5 @@ class MainTests(unittest.TestCase):
 
         second_response = self.app.get('/profile/me1', follow_redirects=True)
         second_response_data = second_response.get_data(as_text=True)
-        self.assertNotIn("To Kill a Mockingbird", second_response_data)
+        self.assertNotIn("Hallow Knight", second_response_data)
         
