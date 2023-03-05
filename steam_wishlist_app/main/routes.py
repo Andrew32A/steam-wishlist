@@ -25,77 +25,77 @@ def init_db():
     a99 = Publisher(name="Not on list")
     db.session.add(a99)
 
-    b1 = Game(
+    g1 = Game(
         title='Bloodborne',
         publish_date=date(2015, 3, 24),
         publisher=a1,
         image="https://image.api.playstation.com/vulcan/img/rnd/202010/2614/NVmnBXze9ElHzU6SmykrJLIV.png",
     )
-    db.session.add(b1)
+    db.session.add(g1)
 
-    b2 = Game(
+    g2 = Game(
         title='Hollow Knight',
         publish_date=date(2017, 2, 24),
         publisher=a2,
         image="https://cdn.cloudflare.steamstatic.com/steam/apps/367520/capsule_616x353.jpg?t=1667006028"
     )
-    db.session.add(b2)
+    db.session.add(g2)
 
-    b3 = Game(
+    g3 = Game(
         title="Elden Ring",
         publish_date=date(2022, 2, 25),
         publisher=a1,
         image="https://image.api.playstation.com/vulcan/ap/rnd/202110/2000/phvVT0qZfcRms5qDAk0SI3CM.png"
     )
-    db.session.add(b3)
+    db.session.add(g3)
 
-    b4 = Game(
+    g4 = Game(
         title="Phasmophobia",
         publish_date=date(2020, 11, 18),
         publisher=a3,
         image="https://cdn.cloudflare.steamstatic.com/steam/apps/739630/capsule_616x353.jpg?t=1674232976"
     )
-    db.session.add(b4)
+    db.session.add(g4)
 
-    b5 = Game(
+    g5 = Game(
         title="God of War",
         publish_date=date(2005, 3, 22),
         publisher=a4,
         image="https://cdn.akamai.steamstatic.com/steam/apps/1593500/capsule_616x353.jpg?t=1642526157"
     )
-    db.session.add(b5)
+    db.session.add(g5)
 
-    b5 = Game(
+    g5 = Game(
         title="Vampire Survivors",
         publish_date=date(2021, 12, 17),
         publisher=a5,
         image="https://upload.wikimedia.org/wikipedia/en/e/e6/Vampire_Survivors_key_art.jpg"
     )
-    db.session.add(b5)
+    db.session.add(g5)
 
-    b6 = Game(
+    g6 = Game(
         title="Deep Rock Galactic",
         publish_date=date(2018, 2, 28),
         publisher=a6,
         image="https://image.api.playstation.com/vulcan/ap/rnd/202010/1407/2JSde8PFCF6B4nO2EECrcR1m.png"
     )
-    db.session.add(b6)
+    db.session.add(g6)
 
-    b7= Game(
+    g7= Game(
         title="Dead Cells",
         publish_date=date(2018, 7, 7),
         publisher=a7,
         image="https://cdn.akamai.steamstatic.com/steam/apps/588650/capsule_616x353.jpg?t=1670838157"
     )
-    db.session.add(b7)
+    db.session.add(g7)
 
-    b8= Game(
+    g8= Game(
         title="Left 4 Dead 2",
         publish_date=date(2009, 11, 17),
         publisher=a8,
         image="https://cdn.akamai.steamstatic.com/steam/apps/550/capsule_616x353.jpg?t=1675801903"
     )
-    db.session.add(b8)
+    db.session.add(g8)
 
     u1 = User(
         username="test-user",

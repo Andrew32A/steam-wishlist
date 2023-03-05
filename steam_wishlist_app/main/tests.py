@@ -4,6 +4,7 @@ import app
 from datetime import date
 from steam_wishlist_app.extensions import app, db, bcrypt
 from steam_wishlist_app.models import Game, Publisher, User
+from flask_login import login_user, logout_user, login_required, current_user
 
 """
 run tests with:
@@ -20,17 +21,13 @@ def logout(client):
     return client.get('/logout', follow_redirects=True)
 
 def create_games():
-    a1 = Publisher(name='Harper Lee')
-    b1 = Game(
-        title='To Kill a Mockingbird',
+    a1 = Publisher(name='Team Cherry')
+    g1 = Game(
+        title='Hallow Knight',
         publish_date=date(1960, 7, 11),
         publisher=a1
     )
-    db.session.add(b1)
-
-    a2 = Publisher(name='Sylvia Plath')
-    b2 = Game(title='The Bell Jar', publisher=a2)
-    db.session.add(b2)
+    db.session.add(g1)
     db.session.commit()
 
 def create_user():
