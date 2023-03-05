@@ -24,6 +24,7 @@ def create_games():
     a1 = Publisher(name='Team Cherry')
     g1 = Game(
         title='Hallow Knight',
+        image='https://upload.wikimedia.org/wikipedia/commons/b/bd/Test.svg',
         publish_date=date(1960, 7, 11),
         publisher=a1
     )
@@ -68,7 +69,6 @@ class MainTests(unittest.TestCase):
 
         self.assertNotIn('Create Game', response_text)
         self.assertNotIn('Create Publisher', response_text)
-        self.assertNotIn('Create Genre', response_text)
  
     def test_homepage_logged_in(self):
         create_games()
@@ -83,7 +83,6 @@ class MainTests(unittest.TestCase):
         self.assertIn('me1', response_text)
         self.assertIn('Create Game', response_text)
         self.assertIn('Create Publisher', response_text)
-        self.assertIn('Create Genre', response_text)
 
         self.assertNotIn('Log In', response_text)
         self.assertNotIn('Sign Up', response_text)
@@ -95,9 +94,9 @@ class MainTests(unittest.TestCase):
 
         post_data = {
             'title': 'Bloodborne',
+            'image': 'https://upload.wikimedia.org/wikipedia/commons/b/bd/Test.svg',
             'publish_date': '2015-07-14',
             'publisher': 1,
-            'genres': []
         }
         self.app.post('/create_game', data=post_data)
 
