@@ -9,7 +9,7 @@ from steam_wishlist_app import User, Game, Publisher
 
 """
 Run these tests with the command:
-python -m unittest steam_wishlist_app.auth.tests
+python3 -m unittest steam_wishlist_app.auth.tests
 """
 
 #################################################

@@ -8,7 +8,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 
 """
 run tests with:
-python -m unittest steam_wishlist_app.main.tests
+python3 -m unittest steam_wishlist_app.main.tests
 """
 
 def login(client, username, password):
