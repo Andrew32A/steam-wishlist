@@ -1,5 +1,5 @@
 # Steam Wishlist
-A backend-focused website designed to store games and users in a database.
+Steam Wishlist is a web application designed to store and manage games and users in a database. The focus of this project is on the backend development and functionality, allowing users to add and remove games to their wishlists, as well as view the wishlists of other users.
 
 ## To run the app locally, you'll need to clone this repository and run the following commands:
 Install dependencies:
