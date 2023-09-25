@@ -1,0 +1,18 @@
+version: "3"
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: Steam
+      POSTGRES_PASSWORD: Wishlist
+      POSTGRES_DB: steamwishlistdb
+
+  steam-wishlist-app:
+    image: andrew32a/steam-wishlist:v1.0
+    ports:
+      - "5000:5000"
+    environment:
+      SECRET_KEY: password
+      DATABASE_URL: postgresql://Steam:Wishlist@postgres:5432/steamwishlistdb
+    depends_on:
+      - postgres
