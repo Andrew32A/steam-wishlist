@@ -24,6 +24,8 @@ python3 app.py
 
 OR
 
+Docker:
+
 ```bash
 docker compose up
 ```
